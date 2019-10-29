@@ -1,0 +1,5 @@
+Group {
+  UniqueID Group_0
+  nodeMask 0xffffffff
+  cullingActive TRUE
+}

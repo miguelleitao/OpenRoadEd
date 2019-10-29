@@ -39,6 +39,9 @@ int main()
 
 	SceneRoot->addChild(mOsgMain.mSceneryGroup);
 
+osgDB::writeNodeFile(*(mOsgMain.mSceneryGroup.get()), "out.osg");
+osgDB::writeNodeFile(*(SceneRoot), "scene.osg");
+
 	// Setup camera
 	osg::Matrix matrix;
  	matrix.makeLookAt( osg::Vec3(0.,-30.,5.), osg::Vec3(0.,0.,0.), osg::Vec3(0.,0.,1.) );
