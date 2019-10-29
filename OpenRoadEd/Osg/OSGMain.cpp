@@ -12,8 +12,6 @@
 #include <osg/MatrixTransform>
 #include <osg/Notify>
 
-#include <osgQt/GraphicsWindowQt>
-
 #include "OSGMain.h"
 #include "OSGCameraControls.h"
 #include "OSGCameraControls2.h"
