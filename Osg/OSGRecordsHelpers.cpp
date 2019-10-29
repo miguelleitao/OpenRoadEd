@@ -159,7 +159,7 @@ void OSGRecordsHelpers::FillHelperGroups (Road *road,unsigned int roadIndex, osg
 
 		laneSectionOffset=road->GetLaneSection(i)->GetS();
 
-		bool tmpCentralLane=false;
+		//bool tmpCentralLane=false;
 		//Lanes
 		for (unsigned int j=0; j<road->GetLaneSection(i)->GetLaneCount(); j++)
 		{

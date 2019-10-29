@@ -125,6 +125,8 @@ public:
 	 */
 	void GetCoords(double s_check, double &retX, double &retY, double &retHDG);
 
+	virtual ~GeometryLine() { };
+
 };
 //----------------------------------------------------------------------------------
 /**
@@ -182,6 +184,9 @@ public:
 	 * Gets the coordinates at the sample S offset
 	 */
 	void GetCoords(double s_check, double &retX, double &retY, double &retHDG);
+
+        virtual ~GeometryArc() { };
+
 protected:
 
 	/**
@@ -253,6 +258,9 @@ public:
 	 * Gets the coordinates at the sample S offset
 	 */
 	void GetCoords(double s_check, double &retX, double &retY, double &retHDG);
+
+        virtual ~GeometrySpiral() { };
+
 protected:
 
 	/**
@@ -293,6 +301,8 @@ public:
 	 * Setter for the base properties
 	 */
 	void SetAll(double s, double x, double y, double hdg, double length, double a,double b,double c,double d);
+
+        virtual ~GeometryPoly3() { };
 
 };
 

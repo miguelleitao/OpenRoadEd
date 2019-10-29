@@ -913,7 +913,9 @@ OSGObjectNode* OSGMain::PickNode(float x, float y)
 							selectionInfo->AddNodeInfoIndex(laneParamInd);
 							break;
 						}
-
+					case LANE_NODE:
+					default:
+						break;
 					}
 
 					//STATISTICS
@@ -1504,6 +1506,9 @@ OSGGeodeNode*  OSGMain::FindNode(OSGObjectNode* objToSelect)
 				nodeToFind=static_cast<OSGGeodeNode*>(mRecordsHelpersGroup->getChild(roadInd)->asGroup()->getChild(groupIndex)->asGroup()->getChild(roadParamInd)->asTransform()->getChild(0));
 				break;
 			}
+		case LANE_NODE:
+		default:
+			break;
 		}
 		return nodeToFind;
 	}

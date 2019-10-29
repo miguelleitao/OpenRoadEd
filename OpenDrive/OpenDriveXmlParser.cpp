@@ -42,10 +42,6 @@ bool OpenDriveXmlParser::ReadHeader(TiXmlElement *node)
 	checker+=node->QueryDoubleAttribute("east",&east);
 	checker+=node->QueryDoubleAttribute("west",&west);
     
-    printf("leu nome: %s\n", name);
-    printf("leu date: %s\n", date);
-    printf("leu version: %f\n", version);
-
 	if (checker!=TIXML_SUCCESS)
 	{
 		cout<<"Error parsing Header attributes"<<endl;
@@ -74,9 +70,6 @@ bool OpenDriveXmlParser::ReadRoad(TiXmlElement *node)
 	checker+=node->QueryStringAttribute("id",&id);
 	checker+=node->QueryStringAttribute("junction",&junction);
 
-    printf("leu Roadlenght: %f\n", length);
-    
-    
 	if (checker!=TIXML_SUCCESS)
 	{
 		cout<<"Error parsing Road attributes"<<endl;
@@ -550,7 +543,7 @@ bool OpenDriveXmlParser::ReadLaneSections (Road* road, TiXmlElement *node)
 	//OutputDebugString( "\n") ;
 	for (unsigned int i=0;i<laneSection->GetLaneVector()->size();i++)
 	{
-		int id = static_cast<Lane>(laneSection->GetLaneVector()->at(i)).GetId();
+		//int id = static_cast<Lane>(laneSection->GetLaneVector()->at(i)).GetId();
 
 		/*char* buf;
 		buf=new char[5];
@@ -1035,7 +1028,7 @@ bool OpenDriveXmlParser::ReadFile(std::string fileName)
 	{
 		TiXmlElement *rootNode=doc.FirstChildElement();
 		//read header
-		int checker=TIXML_SUCCESS;
+		//int checker=TIXML_SUCCESS;
 		TiXmlElement *node=rootNode->FirstChildElement("header");
 		ReadHeader(node);
 

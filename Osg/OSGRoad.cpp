@@ -434,16 +434,16 @@ void OSGRoad::CreateRoadGeometry (vector<osg::ref_ptr<osg::Geometry>> &geometrie
 	//when there is a lane count or type change along the road
 	LaneSectionSample currLaneSectionSample;
 
-	bool prevChange;
-	bool nextChange;
+	//bool prevChange;
+	//bool nextChange;
 
 	//==========================================
 	//Main Pass that fills the geometry arrays 
 	//==========================================
 	for (double s=0.0; s< road->GetRoadLength(); s+=step)
 	{
-		prevChange=false;
-		nextChange=false;
+	//	prevChange=false;
+	//	nextChange=false;
 
 		//First, sample the road
 		//Take a lane section sample at current S
@@ -1101,21 +1101,21 @@ bool  OSGRoad::AddRoadMarksVertices (OSGGeometryArrays &roadMarksGeometry, LaneR
 		type=0;
 		roadMarkTexModifierMax1=roadMarkTexWidth;
 	}
-	else 
+	else {
 		if (roadMark.GetType().compare("broken")==0)
 		{
 			type=0;
 			roadMarkTexModifierMin1=roadMarkTexWidth;
 			roadMarkTexModifierMax1=1;
 		}
-		else 
+		else {
 			if (roadMark.GetType().compare("solid solid")==0)
 			{
 				type=1;		
 				roadMarkTexModifierMax1=roadMarkTexWidth;
 				roadMarkTexModifierMax2=roadMarkTexWidth;
 			}
-			else 
+			else {
 				if (roadMark.GetType().compare("solid broken")==0)
 				{
 					type=2;		
@@ -1125,37 +1125,39 @@ bool  OSGRoad::AddRoadMarksVertices (OSGGeometryArrays &roadMarksGeometry, LaneR
 					roadMarkTexModifierMax2=1;
 				}
 				else 
-					if (roadMark.GetType().compare("broken solid")==0)
-					{
-						type=3;		
-						roadMarkTexModifierMin1=roadMarkTexWidth;
-						roadMarkTexModifierMax1=1;
-						roadMarkTexModifierMin2=0;
-						roadMarkTexModifierMax2=roadMarkTexWidth;
-					}
+				    if (roadMark.GetType().compare("broken solid")==0)
+				    {
+					type=3;		
+					roadMarkTexModifierMin1=roadMarkTexWidth;
+					roadMarkTexModifierMax1=1;
+					roadMarkTexModifierMin2=0;
+					roadMarkTexModifierMax2=roadMarkTexWidth;
+				    }
+			}
+		}
+	}
+			//===============================
+			// Add Vertices
+			//===============================
+			double texX;
+			double texY=s/ROADMARK_BROKEN_TILING;
 
-					//===============================
-					//Add Vertices
-					//===============================
-					double texX;
-					double texY=s/ROADMARK_BROKEN_TILING;
+				if (type>0)
+				{
+					//shift the x,y in case it is a 2 line mark
+					x1 = laneBorderX + cosHdgPlusPiO2*1.5*width;
+					y1 = laneBorderY + sinHdgPlusPiO2*1.5*width;
 
-					if (type>0)
-					{
-						//shift the x,y in case it is a 2 line mark
-						x1 = laneBorderX + cosHdgPlusPiO2*1.5*width;
-						y1 = laneBorderY + sinHdgPlusPiO2*1.5*width;
+					x2 = laneBorderX + cosHdgPlusPiO2*0.25*width;
+					y2 = laneBorderY + sinHdgPlusPiO2*0.25*width;
 
-						x2 = laneBorderX + cosHdgPlusPiO2*0.25*width;
-						y2 = laneBorderY + sinHdgPlusPiO2*0.25*width;
+					x3 = laneBorderX - cosHdgPlusPiO2*0.25*width;
+					y3 = laneBorderY - sinHdgPlusPiO2*0.25*width;
 
-						x3 = laneBorderX - cosHdgPlusPiO2*0.25*width;
-						y3 = laneBorderY - sinHdgPlusPiO2*0.25*width;
+					x4 = laneBorderX - cosHdgPlusPiO2*1.5*width;
+					y4 = laneBorderY - sinHdgPlusPiO2*1.5*width;
 
-						x4 = laneBorderX - cosHdgPlusPiO2*1.5*width;
-						y4 = laneBorderY - sinHdgPlusPiO2*1.5*width;
-
-					}
+				}
 
 					//First vertex
 					texX=roadMarkTexModifierMin1;

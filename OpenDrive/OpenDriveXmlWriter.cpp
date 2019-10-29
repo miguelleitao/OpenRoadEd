@@ -479,7 +479,7 @@ bool OpenDriveXmlWriter::WriteLaneSections (TiXmlElement *node, LaneSection *lan
 	nodeLaneSection->SetAttribute("s",ss.str());
 
 	//Fill in lane section
-	short int curType=1;
+	//short int curType=1;
 	TiXmlElement* nodeLanesLeft=NULL;
 	if(laneSection->GetLeftLaneCount()>0)
 	{

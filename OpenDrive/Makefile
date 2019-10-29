@@ -5,9 +5,12 @@ TARGETS=libXodr.a libXodr.so
 SRCFILES=$(shell ls *.cpp)
 OBJFILES=$(SRCFILES:.cpp=.o)
 
+ifeq ($(PREFIX),)
+    PREFIX := /usr/local
+endif
+
 all: $(TARGETS)
 	@echo "All Done."
-
 
 libXodr.a: $(OBJFILES)
 	ar -crs $@ $^
@@ -19,8 +22,14 @@ libXodr.so: $(OBJFILES)
 
 %.o: %.cpp
 	g++ -c -Wall -fpic $<
-	@echo $@ created.
 
 clean:
-	-rm $(PTSFILES) $(OBJFILES)
+	-rm $(TARGETS) $(OBJFILES)
 
+install: ${TARGETS}
+	install -d $(DESTDIR)$(PREFIX)/lib/
+	install -m 644 $^ $(DESTDIR)$(PREFIX)/lib/
+
+uninstall:
+	-rm $(DESTDIR)$(PREFIX)/lib/libXodr.a
+	-rm $(DESTDIR)$(PREFIX)/lib/libXodr.so

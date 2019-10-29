@@ -48,7 +48,7 @@ private:
 	 * Copy constructor, makes the object non-copyable
 	 */
 	OpenDrive (const OpenDrive& openDrive){};
-	const OpenDrive& operator=(const OpenDrive& rhs){};
+	const OpenDrive& operator=(const OpenDrive& rhs){ return *this; };
 
 public:
 	/**

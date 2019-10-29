@@ -236,11 +236,11 @@ bool OSGCameraControls2::calculateMovement()
 
 		osg::Matrixd rotation_matrix;
 		rotation_matrix.makeRotate(mRotation);
-		osg::Vec3d sideVector = getSideVector(rotation_matrix);
+		//osg::Vec3d sideVector = getSideVector(rotation_matrix);
 
 		osg::Vec3d localUp(0,0,1);
 
-		osg::Vec3d forwardVector =localUp^sideVector;
+		//osg::Vec3d forwardVector =localUp^sideVector;
 
 		osg::Vec3d dv = localUp * (dy*scale);// + sideVector * (dx*scale);
 
