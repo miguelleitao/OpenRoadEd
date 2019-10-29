@@ -1,21 +1,22 @@
-# OpenRoadEd
+# Xodr2OSG
 
-OpenRoadEd is a simple application designed to create both logical (OpenDRIVE standard) and geometrical (OpenSceneGraph) descriptions of road networks.
+Xodr2OSG is aimed in reading OpenDrive scenes to OpenSceneGraph structures. 
+Poduced OpenSceneGraph structures can then be viewed in a simple OSG viewer or save into .osg scene files.
 
-Forked from https://sourceforge.net/projects/openroaded/.  
-There is another fork at https://gitlab.com/OpenRoadEd/OpenRoadEd.
+Created by Miguel Leitao from a fork of https://github.com/fhwedel-hoe/OpenRoadEd, 
+forked from https://sourceforge.net/projects/openroaded/.  
 
-OpenRoadEd was created as part of this master's thesis: http://hdl.handle.net/2077/23047 by Dmitri and Egor Kurteanu.  
-This fork was adapted to compile on Linux (Ubuntu 18.04).
+Forked OpenRoadEd project was created as part of this master's thesis: http://hdl.handle.net/2077/23047 by Dmitri and Egor Kurteanu.  
 
 ### Build Instructions
 
-Installed packages: libqt4-dev qt4-qmake qt4-dev-tools libopenscenegraph-dev
+make
+
+Requires OpenSceneGraph-devel and Tinyxml.
 
 ### Launch Instructions
 
-Working directory needs to contain the "Resources" folder.
+./xodr2osg test.xodr test.osg
+./xodr2osg test.xodr 
+./xodrviewer test.xodr
 
-### Known Issues
-
-Display does not work properly. 
