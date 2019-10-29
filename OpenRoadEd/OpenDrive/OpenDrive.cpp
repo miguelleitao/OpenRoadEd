@@ -38,6 +38,7 @@ unsigned int OpenDrive::AddRoad(string name, double length, string id, string ju
 	mRoadVector.push_back(Road(name, length, id, junction));
 	// Saves the index of the newly added road
 	mLastAddedRoad=index;
+
 	return index;
 }
 unsigned int OpenDrive::AddJunction(string name, string id)

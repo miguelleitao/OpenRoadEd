@@ -163,7 +163,7 @@ void OSGMain::setViewerRectangle(int x, int y, int width, int height)
 }
 
 /**
-* Load a mode
+* Load a model
 * @param filename A path to a file supported by OpenSceneGraph
 */
 void OSGMain::loadModel(const std::string &filename)
@@ -345,7 +345,6 @@ void OSGMain::DrawRoads()
 {
 	//start Timer for statistics
 	osg::Timer_t startTick = osg::Timer::instance()->tick();
-
 	for (unsigned int i=0; i<mOpenDrive->GetRoadCount(); i++)
 	{
 		//if the road is a road, not a junction path

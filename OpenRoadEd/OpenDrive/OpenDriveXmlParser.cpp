@@ -41,6 +41,10 @@ bool OpenDriveXmlParser::ReadHeader(TiXmlElement *node)
 	checker+=node->QueryDoubleAttribute("south",&south);
 	checker+=node->QueryDoubleAttribute("east",&east);
 	checker+=node->QueryDoubleAttribute("west",&west);
+    
+    printf("leu nome: %s\n", name);
+    printf("leu date: %s\n", date);
+    printf("leu version: %f\n", version);
 
 	if (checker!=TIXML_SUCCESS)
 	{
@@ -53,7 +57,7 @@ bool OpenDriveXmlParser::ReadHeader(TiXmlElement *node)
 	return true;
 
 }
-//--------------
+// //--------------
 
 bool OpenDriveXmlParser::ReadRoad(TiXmlElement *node)
 {
@@ -70,6 +74,9 @@ bool OpenDriveXmlParser::ReadRoad(TiXmlElement *node)
 	checker+=node->QueryStringAttribute("id",&id);
 	checker+=node->QueryStringAttribute("junction",&junction);
 
+    printf("leu Roadlenght: %f\n", length);
+    
+    
 	if (checker!=TIXML_SUCCESS)
 	{
 		cout<<"Error parsing Road attributes"<<endl;
