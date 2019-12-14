@@ -1,7 +1,7 @@
 # Xodr2OSG
 
 Xodr2OSG is aimed in reading OpenDrive scenes to OpenSceneGraph structures. 
-Poduced OpenSceneGraph structures can then be viewed in a simple OSG viewer or saved into .osg scene files.
+Produced OpenSceneGraph structures can then be viewed in a simple OSG viewer or saved into .osg scene files.
 
 Created by Miguel Leitao from a fork of https://github.com/fhwedel-hoe/OpenRoadEd, 
 forked from https://sourceforge.net/projects/openroaded/.  
