@@ -48,32 +48,42 @@ int main(int argc, char* argv[])
     OpenDrive mOpenDrive;
 
 	OpenDriveXmlParser mOpenDriveParser(&mOpenDrive);
+printf("Parsing file\n");
+printf("Parsing file %s\n",argv[1]);
 	mOpenDriveParser.ReadFile(argv[1]);
+    
+printf("File parsed\n");
 
     // Creates the OSG object
     OSGMain mOsgMain( &(mOpenDrive) );
+printf("Drawing roads\n");
     mOsgMain.DrawRoads();
-
-    if ( ! runViewer ) {
-        osgDB::writeNodeFile(*(mOsgMain.mRoadsGroup.get()), fout_name);
-        //osgDB::writeNodeFile(*(SceneRoot), "scene.osg");
+    if ( ! mOsgMain.mRootGroup ) {
+        fprintf(stderr,"Road not built\n");
     }
     else {
-        // Creating the viewer
-        osgViewer::Viewer viewer ;
-        viewer.setSceneData( mOsgMain.mRootGroup );
+        if ( ! runViewer ) {
+            osgDB::writeNodeFile(*(mOsgMain.mRoadsGroup.get()), fout_name);
+            //osgDB::writeNodeFile(*(SceneRoot), "scene.osg");
+        }
+        else {
+            // Creating the viewer
+            osgViewer::Viewer viewer;
+            printf("Adding rootgroup\n");
+            viewer.setSceneData( mOsgMain.mRootGroup );
 
-        //SceneRoot->addChild(mOsgMain.mRootGroup);
+            //SceneRoot->addChild(mOsgMain.mRootGroup);
 
-        // Setup camera
-        osg::Matrix matrix;
-        matrix.makeLookAt( osg::Vec3(0.,-30.,5.), osg::Vec3(0.,0.,0.), osg::Vec3(0.,0.,1.) );
-        viewer.getCamera()->setViewMatrix(matrix);
+            // Setup camera
+            osg::Matrix matrix;
+            matrix.makeLookAt( osg::Vec3(0.,-30.,5.), osg::Vec3(0.,0.,0.), osg::Vec3(0.,0.,1.) );
+            viewer.getCamera()->setViewMatrix(matrix);
 
-        viewer.setCameraManipulator(  new osgGA::TrackballManipulator() );
+            viewer.setCameraManipulator(  new osgGA::TrackballManipulator() );
 
-        while( !viewer.done() ) {
-            viewer.frame();
+            while( !viewer.done() ) {
+                viewer.frame();
+            }
         }
     }
     free(fout_name);

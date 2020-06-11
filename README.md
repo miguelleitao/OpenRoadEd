@@ -16,7 +16,7 @@ Requires OpenSceneGraph-devel and Tinyxml.
 
 ### Launch Instructions
 
-  ./xodr2osg test.xodr test.osg
-  ./xodr2osg test.xodr 
-  ./xodrviewer test.xodr
+    ./xodr2osg test.xodr test.osg
+    ./xodr2osg test.xodr 
+    ./xodrviewer test.xodr
 

@@ -287,8 +287,6 @@ bool OpenDriveXmlParser::ReadPlanView(Road* road, TiXmlElement *node)
 		{
 			ReadGeometryBlock(road, subNode,2);		//load a polynom spline block
 		}
-			
-
 		subNode=subNode->NextSiblingElement("geometry");
 
 	}
@@ -300,23 +298,36 @@ bool OpenDriveXmlParser::ReadGeometryBlock (Road* road, TiXmlElement *&node, sho
 {
 	road->AddGeometryBlock();
 	GeometryBlock* geomBlock=road->GetLastAddedGeometryBlock();
+    
+    if ( !node ) {
+        fprintf(stderr,"Invalid node in OpenDriveXmlParser::ReadGeometryBlock\n");
+        return false;
+    }
+    
 	switch (blockType)
 	{
-	case 0:
-		ReadGeometry(geomBlock, node, 0);
-		break;
-	case 1:
-		ReadGeometry(geomBlock, node, 1);
-		node=node->NextSiblingElement("geometry");
-		ReadGeometry(geomBlock, node, 2);
-		node=node->NextSiblingElement("geometry");
-		ReadGeometry(geomBlock, node, 1);
-		break;
-	case 2:
-		ReadGeometry(geomBlock, node, 3);
-		break;
-	}
-
+        case 0:
+            ReadGeometry(geomBlock, node, 0);
+            break;
+        case 1:
+            ReadGeometry(geomBlock, node, 1);
+            node=node->NextSiblingElement("geometry");
+            if ( !node ) {
+                fprintf(stderr,"Invalid sibiling node 1 in OpenDriveXmlParser::ReadGeometryBlock\n");
+                return false;
+            }
+            ReadGeometry(geomBlock, node, 2);
+            node=node->NextSiblingElement("geometry");
+            if ( !node ) {
+                fprintf(stderr,"Invalid sibiling node 2 in OpenDriveXmlParser::ReadGeometryBlock\n");
+                return false;
+            }
+            ReadGeometry(geomBlock, node, 1);
+            break;
+        case 2:
+            ReadGeometry(geomBlock, node, 3);
+            break;
+    }
 	return true;
 	
 }
@@ -324,8 +335,13 @@ bool OpenDriveXmlParser::ReadGeometryBlock (Road* road, TiXmlElement *&node, sho
 
 bool OpenDriveXmlParser::ReadGeometry(GeometryBlock* geomBlock, TiXmlElement *node, short int geometryType)
 {
+    //printf("OpenDriveXmlParser::ReadGeometry\n");
 	double s, x, y, hdg, length;
-	//read the geometry node
+	//read the geometry node        
+    if ( !node ) {
+        fprintf(stderr,"Invalid node in OpenDriveXmlParser::ReadGeometry\n");
+        return false;
+    }
 	int checker=TIXML_SUCCESS;
 	checker+=node->QueryDoubleAttribute("s",&s);
 	checker+=node->QueryDoubleAttribute("x",&x);
@@ -333,12 +349,13 @@ bool OpenDriveXmlParser::ReadGeometry(GeometryBlock* geomBlock, TiXmlElement *no
 	checker+=node->QueryDoubleAttribute("hdg",&hdg);
 	checker+=node->QueryDoubleAttribute("length",&length);
 
+    printf("Block s:%f x:%f y:%f hdg:%f len:%f\n", s, x, y, hdg, length);
+    
 	if (checker!=TIXML_SUCCESS)
 	{
 		cout<<"Error parsing Geometry attributes"<<endl;
 		return false;
 	}
-
 	TiXmlElement *subNode=node->FirstChildElement();
 
 	//read the type nodes
@@ -387,8 +404,9 @@ bool OpenDriveXmlParser::ReadGeometry(GeometryBlock* geomBlock, TiXmlElement *no
 
 		geomBlock->AddGeometryPoly3(s,x,y,hdg,length,a,b,c,d);
 		break;
+    default:
+        printf("  Bad geometry type: %d\n", geometryType);
 	}
-
 	return true;
 }
 //--------------
