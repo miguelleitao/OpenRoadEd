@@ -11,8 +11,9 @@ Forked OpenRoadEd project was created as part of this master's thesis: http://hd
 ### Build Instructions
 
 make
+sudo make install_libs
 
-Requires OpenSceneGraph-devel and Tinyxml.
+Requires OpenSceneGraph-devel, qt-devel and Tinyxml.
 
 ### Launch Instructions
 

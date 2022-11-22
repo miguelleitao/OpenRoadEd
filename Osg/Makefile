@@ -20,7 +20,7 @@ libodOSG.so: $(OBJFILES)
 	g++ -shared -o $@ $^
 	@echo "$@ Done."\
 
-%.o: %.cpp
+%.o: %.cpp %.h
 	g++ -c -Wall -fpic $<
 
 .PHONY: clean
@@ -38,3 +38,6 @@ uninstall:
 	-rm $(DESTDIR)$(PREFIX)/lib/libodOSG.a
 	-rm $(DESTDIR)$(PREFIX)/lib/libodOSG.so
 
+OSGMain.o: OSGCameraControls.h OSGCameraControls2.h OSGConstants.h
+OSGRoad.cpp: OSGConstants.h
+OSGJunction.cpp: OSGConstants.h OSGRoad.h
