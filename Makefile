@@ -22,6 +22,10 @@ OpenDrive/libXodr.so:
 Osg/libodOSG.so:
 	make -C Osg
 
+install_libs: OpenDrive/libXodr.so Osg/libodOSG.so
+	make -C OpenDrive install
+	make -C Osg install
+
 push:
 	git add .
 	git commit -m "update"

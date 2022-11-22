@@ -29,6 +29,7 @@ clean:
 install: ${TARGETS}
 	install -d $(DESTDIR)$(PREFIX)/lib/
 	install -m 644 $^ $(DESTDIR)$(PREFIX)/lib/
+	ldconfig
 
 uninstall:
 	-rm $(DESTDIR)$(PREFIX)/lib/libXodr.a
